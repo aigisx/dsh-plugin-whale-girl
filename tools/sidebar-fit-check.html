@@ -1,0 +1,65 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>whale-girl sidebar fit check</title>
+<link rel="stylesheet" href="/harness.css">
+<style>
+body{background:#fff;color:#1c1d20;margin:0;padding:16px 18px 0}
+h1{font-size:15px;margin:0 0 2px}
+p.lead{font-size:12px;color:#6a6f78;margin:0 0 12px}
+.cols{display:flex;gap:22px;align-items:flex-start}
+.col h2{font-size:13px;margin:0 0 8px}
+.col.before h2{color:#b4232c}
+.col.after h2{color:#1a7f43}
+iframe{border:1px solid #dcdfe4;border-radius:10px;width:368px;height:400px;display:block}
+pre{font:11px/1.5 ui-monospace,Consolas,monospace;color:#3c4048;margin:14px 0 0;white-space:pre}
+</style></head>
+<body>
+<h1>鲸鱼娘主题：侧边栏图标显示区域验证 / sidebar mark fit check</h1>
+<p class="lead">标记尺寸 1.8×，官方侧边栏样式 + 本插件的样式表；两列使用同一份元素结构，仅差修复用的两条规则。</p>
+<div class="cols">
+  <div class="col before"><h2>修复前（官方会裁掉超出的部分）</h2><iframe id="before" src="sidebar-fit-check.before.html"></iframe></div>
+  <div class="col after"><h2>修复后（本次改动）</h2><iframe id="after" src="sidebar-fit-check.after.html"></iframe></div>
+</div>
+<pre id="table">measuring…</pre>
+<script>
+const SCALES = [0.5,1,1.25,1.8,2];
+const POSED = 1.8;
+const reports = {};
+const frames = { before: document.getElementById("before"), after: document.getElementById("after") };
+const done = () => Object.keys(reports).length === 2;
+const post = (payload) => fetch("/report", { method: "POST", body: JSON.stringify(payload) }).catch(() => {});
+const pct = (ratio) => Math.round(ratio * 100) + "%";
+const verdict = (row) => (row.ratio >= 0.999 && row.hits === row.total ? "完整" : "被裁 " + pct(1 - row.ratio));
+
+const paint = () => {
+  const lines = [];
+  for (const column of ["before", "after"]) {
+    lines.push((column === "before" ? "before (shipped)" : "after (this build)") + ":");
+    for (const [caseId, sweep] of Object.entries(reports[column].cases)) {
+      for (const row of sweep) {
+        lines.push("  " + caseId.padEnd(14) + String(row.scale).padStart(5) + "x  " +
+          "visible " + pct(row.ratio).padStart(5) + "  hit " + row.hits + "/" + row.total +
+          "  box " + row.width.toFixed(1) + "x" + row.height.toFixed(1) + "px  " + verdict(row));
+      }
+    }
+  }
+  document.getElementById("table").textContent = lines.join("\n");
+};
+
+window.addEventListener("message", (event) => {
+  const data = event.data;
+  if (data === null || typeof data !== "object" || data.kind !== "whale-girl-fit") return;
+  reports[data.column] = data;
+  if (!done()) return;
+  paint();
+  post({ kind: "whale-girl-fit", reports });
+});
+window.addEventListener("error", (event) => post({ kind: "whale-girl-fit-error", message: String(event.message) }));
+
+// An iframe can finish before this listener exists, so ask for the report until
+// both columns have answered instead of relying on a single announcement.
+const poll = setInterval(() => {
+  if (done()) { clearInterval(poll); return; }
+  for (const frame of Object.values(frames)) if (frame.contentWindow !== null) frame.contentWindow.postMessage({ kind: "whale-girl-fit-poll" }, "*");
+}, 200);
+</script>
+</body></html>

@@ -1,0 +1,11 @@
+# Whale-girl theme bundle: one row, resolved from this package itself.
+#
+# The row's node half is an empty apply (lib/index.js); the browser half ships
+# through package.json's exports["./client"] and is served by dsh-client-modules.
+# Nothing here disables a shipped row: the sidebar and hero marks are replaced by
+# shadowing their slots at a lower priority, so the official brand plugin keeps
+# rendering the DeepSeek Harness wordmark.
+
+- insert:
+    - id: whale-girl
+      name: 'dsh-plugin-whale-girl'

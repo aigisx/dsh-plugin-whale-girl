@@ -1,0 +1,12 @@
+# Installed dependencies (this package is consumed as a link: dependency)
+node_modules/
+
+# Scratch directories: asset work, previews, converted sources
+_whale-girl-work/
+*.local
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
