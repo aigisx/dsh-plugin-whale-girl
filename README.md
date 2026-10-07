@@ -1,5 +1,11 @@
 # dsh-plugin-whale-girl
 
+[![dshbase 实测可装](https://dshbase.com/badges/dsh-plugin-whale-girl.svg)](https://dshbase.com/zh/plugins/dsh-plugin-whale-girl/)
+[![dshfind](https://dshfind.com/api/badge/aigisx/dsh-plugin-whale-girl)](https://dshfind.com/zh/plugins/aigisx/dsh-plugin-whale-girl?ref=badge)
+[![npm](https://img.shields.io/npm/v/dsh-plugin-whale-girl?label=npm)](https://www.npmjs.com/package/dsh-plugin-whale-girl)
+[![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/aigisx/dsh-plugin-whale-girl?label=stars)](https://github.com/aigisx/dsh-plugin-whale-girl/stargazers)
+
 > **项目简介：修改应用内的图标，并调整尺寸大小。**
 
 把 DeepSeek Harness **应用内**的鲸鱼图标换成鲸鱼娘，「思考中」前面的小图标换成一只**蓝底小米饭小碗**，并把中文的「深度求索中」改成「努力干饭中」；两个图标的大小都可以在应用内的**插件设置**里单独调整。

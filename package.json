@@ -1,11 +1,28 @@
 {
   "name": "dsh-plugin-whale-girl",
   "version": "0.3.0",
-  "private": true,
-  "type": "module",
   "description": "修改应用内的图标，并调整尺寸大小。",
-  "icon": "./icon.png",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "cordis-plugin",
+    "deepseek-harness",
+    "icon",
+    "theme",
+    "branding"
+  ],
+  "homepage": "https://github.com/aigisx/dsh-plugin-whale-girl#readme",
+  "bugs": {
+    "url": "https://github.com/aigisx/dsh-plugin-whale-girl/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aigisx/dsh-plugin-whale-girl.git"
+  },
+  "author": "aigisx",
   "license": "MIT",
+  "icon": "./icon.png",
+  "type": "module",
   "main": "./lib/index.js",
   "exports": {
     ".": {
@@ -24,6 +41,13 @@
     "icon.png",
     "cordis.patch.yml"
   ],
+  "scripts": {
+    "check": "node tools/host-check.mjs && node tools/selftest.mjs",
+    "prepublishOnly": "node tools/host-check.mjs && node tools/selftest.mjs"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "peerDependencies": {
     "@deepseek-ai/cordis": "~4.0.4",
     "@deepseek-ai/schemastery": "~3.18.4"
