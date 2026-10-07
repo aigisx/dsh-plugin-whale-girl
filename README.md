@@ -2,7 +2,6 @@
 
 [![dshbase 实测可装](https://dshbase.com/badges/dsh-plugin-whale-girl.svg)](https://dshbase.com/zh/plugins/dsh-plugin-whale-girl/)
 [![dshfind](https://dshfind.com/api/badge/aigisx/dsh-plugin-whale-girl)](https://dshfind.com/zh/plugins/aigisx/dsh-plugin-whale-girl?ref=badge)
-[![npm](https://img.shields.io/npm/v/dsh-plugin-whale-girl?label=npm)](https://www.npmjs.com/package/dsh-plugin-whale-girl)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/aigisx/dsh-plugin-whale-girl?label=stars)](https://github.com/aigisx/dsh-plugin-whale-girl/stargazers)
 
